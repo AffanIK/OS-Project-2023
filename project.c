@@ -107,19 +107,7 @@ return NULL;
 }
 int main() {
 	// Create the graph
-	addnode(0, 5);
-	addnode(1, 3);
-	addnode(2, 2);
-	addnode(3, 1);
-	addnode(4, 0);
 	
-	addedge(0, 1, 2);
-	addedge(0, 2, 4);
-	addedge(1, 2, 1);
-	addedge(1, 3, 7);
-	addedge(2, 3, 3);
-	addedge(2, 4, 4);
-	addedge(3, 4, 1);
 // Create the threads
 pthread_t threads[threads];
 int starts[threads];
