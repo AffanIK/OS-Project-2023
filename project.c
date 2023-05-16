@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-#define NUM_THREADS 4 
+#define threads 4 
 #define MAX_NODES 100 
 
 typedef struct Node {
@@ -121,15 +121,15 @@ int main() {
 	addedge(2, 4, 4);
 	addedge(3, 4, 1);
 // Create the threads
-pthread_t threads[NUM_THREADS];
-int starts[NUM_THREADS];
-for (int i = 0; i < NUM_THREADS; i++) {
+pthread_t threads[threads];
+int starts[threads];
+for (int i = 0; i < threads; i++) {
     starts[i] = i;
     pthread_create(&threads[i], NULL, search, &starts[i]);
 }
 
 // Wait for the threads to finish
-for (int i = 0; i < NUM_THREADS; i++) {
+for (int i = 0; i < threads; i++) {
     pthread_join(threads[i], NULL);
 }
 
