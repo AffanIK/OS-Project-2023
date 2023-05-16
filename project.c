@@ -3,7 +3,7 @@
 #include <pthread.h>
 
 #define threads 4 
-#define MAX_NODES 100 
+#define nodes 100 
 
 typedef struct Node {
     int id;
@@ -19,9 +19,9 @@ typedef struct Edge {
 } Edge;
 
 int num_nodes = 0;
-Node* nodes[MAX_NODES];
+Node* nodes[nodes];
 int num_edges = 0;
-Edge edges[MAX_NODES * MAX_NODES];
+Edge edges[nodes * nodes];
 
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER; // Initialize mutex
 
@@ -40,9 +40,9 @@ void addedge(int from, int to, int cost) {
 void* search(void* arg) {
     int start = *(int*)arg;
 
-    Node* open_set[MAX_NODES];
+    Node* open_set[nodes];
     int num_open = 0;
-    Node* closed_set[MAX_NODES];
+    Node* closed_set[nodes];
     int num_closed = 0;
 
     open_set[num_open++] = nodes[start];
