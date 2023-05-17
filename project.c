@@ -1,4 +1,6 @@
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
 
 #define threads 4 
 #define nodes 100 
