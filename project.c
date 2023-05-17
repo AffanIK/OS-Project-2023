@@ -23,7 +23,7 @@ Node* nodes[MAX_NODES];
 int num_edges = 0;
 Edge edges[MAX_NODES * MAX_NODES];
 
-
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER; // Initialize mutex
 
 void addnode(int id, int heuristic) {
     Node* node = malloc(sizeof(Node));
@@ -104,4 +104,34 @@ void* search(void* arg) {
 }
 
 return NULL;
+}
+int main() {
+// Create the graph
+addnode(0, 5);
+addnode(1, 3);
+addnode(2, 2);
+addnode(3, 1);
+addnode(4, 0);
+
+addedge(0, 1, 2);
+addedge(0, 2, 4);
+addedge(1, 2, 1);
+addedge(1, 3, 7);
+addedge(2, 3, 3);
+addedge(2, 4, 4);
+addedge(3, 4, 1);
+// Create the threads
+pthread_t threads[NUM_THREADS];
+int starts[NUM_THREADS];
+for (int i = 0; i < NUM_THREADS; i++) {
+    starts[i] = i;
+    pthread_create(&threads[i], NULL, search, &starts[i]);
+}
+
+// Wait for the threads to finish
+for (int i = 0; i < NUM_THREADS; i++) {
+    pthread_join(threads[i], NULL);
+}
+
+return 0;
 }
