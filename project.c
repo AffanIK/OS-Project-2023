@@ -37,7 +37,8 @@ void addedge(int from, int to, int cost) {
     edges[num_edges++] = (Edge){ from, to, cost };
 }
 
-void* search(void* arg) {
+void* search(void* arg)
+{
     int start = *(int*)arg;
 
     Node* open_set[nodes];
